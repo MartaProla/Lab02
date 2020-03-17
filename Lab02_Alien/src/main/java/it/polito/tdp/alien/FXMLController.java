@@ -4,7 +4,6 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import it.polito.tdp.alien.alienModel.AlienDictionary;
-import it.polito.tdp.alien.alienModel.WordEnhaced;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -53,7 +52,7 @@ public class FXMLController {
     		String parolaAliena=parts[0].trim();
     		String traduzione=parts[1].trim();
     		//controlli correttezza parola
-    		if(parolaAliena.toLowerCase().matches("[a-zA-Z]*") && traduzione.toLowerCase().matches("[a-zA-Z]*")) {
+    		if(parolaAliena.toLowerCase().matches("[a-zA-Z]*") && traduzione.toLowerCase().matches("[a-zA-Z]*") || parolaAliena.contains("?")) {
 	    		dizionario.addWord(parolaAliena, traduzione);
 	    		txtResult.clear();
 	    		txtResult.appendText("Inserita la corrispondenza in modo corretto\n");
@@ -65,7 +64,7 @@ public class FXMLController {
     			String parolaAliena=parts[0].trim();
   
     			String trad="";
-    			if(parolaAliena.toLowerCase().matches("[a-zA-Z]*")) {
+    			if(parolaAliena.toLowerCase().matches("[a-zA-Z]*")|| parolaAliena.contains("?")) {
     				trad=dizionario.translateWord(parolaAliena);
     			}else {
     				txtResult.appendText("Fai attenzione sono ammessi solo caratteri alfabetici \n");

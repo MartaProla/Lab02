@@ -6,6 +6,7 @@ import java.util.List;
 public class WordEnhaced {
 	private String alienWord;
 	private List<String>possibiliTraduzioni;
+	private String trad;
 	public WordEnhaced(String alienWord) {
 		super();
 		this.alienWord = alienWord;
@@ -24,6 +25,13 @@ public class WordEnhaced {
 		if(!possibiliTraduzioni.contains(trad))
 			possibiliTraduzioni.add(trad);
 	}
+	public String getTrad() {
+		return trad;
+	}
+	public void setTrad(String trad) {
+		this.trad = trad;
+	}
+	
 	
 
 }

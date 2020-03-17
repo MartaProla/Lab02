@@ -6,10 +6,8 @@ import java.util.List;
 
 public class AlienDictionary {
 	private List<WordEnhaced>elenco;
-	private List<String>elencoT;
 	public AlienDictionary() {
 		elenco=new LinkedList<WordEnhaced>();
-		elencoT=new LinkedList<String>();
 	}
 
 	public void addWord(String alienWord, String translation) {
@@ -23,29 +21,48 @@ public class AlienDictionary {
 		}
 		if(trovato==true) {
 			w1.aggiungiTraduzione(translation);
-			elencoT.add(translation);
+			w1.setTrad(translation);
+			
 		}
 		else {
 			w1=new WordEnhaced(alienWord);
 			elenco.add(w1);
-			elencoT.add(translation);
 			w1.aggiungiTraduzione(translation);
+			w1.setTrad(translation);
 		}
 		
 	}
 	
 	public String translateWord(String alienWord) {
+		List<WordEnhaced>elencoLungAdatta= new LinkedList<WordEnhaced>();
 		String result="";
 		for(int i=0;i<elenco.size();i++) {
 			WordEnhaced w=elenco.get(i);
-			if(w.getAlienWord().compareTo(alienWord)==0) {
-				for(int j=0;j<w.getPossibiliTraduzioni().size();j++)
-					result+=w.getPossibiliTraduzioni().get(j)+"\n";
+			if(w.getAlienWord().length()==alienWord.length()) {
+				elencoLungAdatta.add(w);
 			}
+		}
+		LinkedList<WordEnhaced>elencoRimuovi=new LinkedList<WordEnhaced>();
+		for(WordEnhaced s : elencoLungAdatta) {
+			for(int i=0;i<s.getAlienWord().length();i++) {
+				char x= s.getAlienWord().charAt(i);
+				char y=alienWord.charAt(i);
+				if(x!=y && y!='?') {
+					elencoRimuovi.add(s);
+				}
+					
+			}
+		}
+		elencoLungAdatta.removeAll(elencoRimuovi);
+		if(elencoLungAdatta.size()>=1) {
+			for(int i=0;i<elencoLungAdatta.size();i++)
+				result+=elencoLungAdatta.get(i).getTrad()+"\n";
 		}
 		return result;
 		
 	}
+	
+	 
 	
 
 }
