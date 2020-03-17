@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import it.polito.tdp.alien.alienModel.AlienDictionary;
+import it.polito.tdp.alien.alienModel.WordEnhaced;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -62,6 +63,7 @@ public class FXMLController {
     		if(parts.length==1) {
     			//vuoi la traduzione
     			String parolaAliena=parts[0].trim();
+  
     			String trad="";
     			if(parolaAliena.toLowerCase().matches("[a-zA-Z]*")) {
     				trad=dizionario.translateWord(parolaAliena);

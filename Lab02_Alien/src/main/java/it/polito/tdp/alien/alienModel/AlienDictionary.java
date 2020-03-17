@@ -5,42 +5,47 @@ import java.util.List;
 
 
 public class AlienDictionary {
-	private List<Word>parole;
-	
+	private List<WordEnhaced>elenco;
+	private List<String>elencoT;
 	public AlienDictionary() {
-		parole=new LinkedList<Word>();
+		elenco=new LinkedList<WordEnhaced>();
+		elencoT=new LinkedList<String>();
 	}
 
 	public void addWord(String alienWord, String translation) {
+		WordEnhaced w1=null;
 		boolean trovato=false;
-		String s="";
-		Word w=null;
-		for(Word w1:parole) {
-			if(w1.getAlienWord().compareTo(alienWord)==0) {
+		for(WordEnhaced w: elenco) {
+			if(w.getAlienWord().compareTo(alienWord)==0) {
 				trovato=true;
-				w=w1;
-				s=translation;
+				w1=w;
 			}
-				
 		}
 		if(trovato==true) {
-			w.setTranslation(s);
-			
-		}else {
-			Word w1=new Word(alienWord,translation);
-			parole.add(w1);
+			w1.aggiungiTraduzione(translation);
+			elencoT.add(translation);
+		}
+		else {
+			w1=new WordEnhaced(alienWord);
+			elenco.add(w1);
+			elencoT.add(translation);
+			w1.aggiungiTraduzione(translation);
 		}
 		
 	}
 	
 	public String translateWord(String alienWord) {
-		String result=null;
-		for(Word w: parole) {
-			if(w.getAlienWord().compareTo(alienWord)==0)
-				result=w.getTranslation();
+		String result="";
+		for(int i=0;i<elenco.size();i++) {
+			WordEnhaced w=elenco.get(i);
+			if(w.getAlienWord().compareTo(alienWord)==0) {
+				for(int j=0;j<w.getPossibiliTraduzioni().size();j++)
+					result+=w.getPossibiliTraduzioni().get(j)+"\n";
+			}
 		}
 		return result;
 		
 	}
+	
 
 }
